@@ -8,16 +8,16 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   // python
-  "python.formatting.provider": "black",
+  "python.formatting.provider": "none",
   "python.formatting.blackArgs": [],
   "python.languageServer": "Pylance",
-  "python.linting.enabled": true,
+  "python.linting.enabled": false,
   "python.linting.lintOnSave": true,
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": [],
   "[python]": {
     "editor.tabSize": 4,
-    "editor.defaultFormatter": "ms-python.python"
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
 }
