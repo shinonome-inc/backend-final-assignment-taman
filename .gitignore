@@ -106,7 +106,7 @@ celerybeat.pid
 .venv
 env/
 venv/
-myvenv/
+venv2/
 ENV/
 env.bak/
 venv.bak/
@@ -128,3 +128,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Mac OS
+.DS_Store
