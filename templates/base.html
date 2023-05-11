@@ -1,10 +1,26 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ja">
+<link rel="stylesheet" href="{% static 'css/twitterclone.css' %}">
+
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>{% block title %}Twitter Clone{% endblock %}</title>
 </head>
-<body>
 
+<body>
+  <header>
+    <p id="logo">Twitter Clone</p>
+    <div id="topbuttons">
+      <button type="button" class="whiteback">ログイン</button>
+      <a href="{% url 'accounts:signup' %}">
+        <button type="button" class="blueback">登録</button>
+      </a>
+    </div>
+  </header>
+  {% block content %}
+  {% endblock %}
 </body>
+
 </html>
