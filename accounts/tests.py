@@ -200,8 +200,15 @@ class TestSignupView(TestCase):
         self.assertIn("確認用パスワードが一致しません。", form.errors["password2"])
 
 
-# class TestLoginView(TestCase):
-#     def test_success_get(self):
+class TestLoginView(TestCase):
+    def setUp(self):
+        self.url = reverse("accounts:login")
+
+    def test_success_get(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "accounts/login.html")
+
 
 #     def test_success_post(self):
 
