@@ -1,0 +1,38 @@
+header {
+    display: flex;
+}
+
+#logo {
+    width: 30%;
+    margin: 2px 0;
+    font-size: 16pt;
+    color: rgb(0, 132, 255);
+}
+
+button {
+    font-size: 12pt;
+    padding: 5px 5px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+#topbuttons {
+    width: 70%;
+    text-align: right;
+}
+
+#topbuttons button {
+    width: 74px;
+}
+
+.blueback {
+    background: rgb(0, 132, 255);
+    border: none;
+    color: white;
+}
+
+.whiteback {
+    background: whitesmoke;
+    border: none;
+    color: rgb(0, 132, 255);
+}
