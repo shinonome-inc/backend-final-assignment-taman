@@ -6,7 +6,7 @@ from django.views.generic import CreateView, DetailView
 
 from .forms import SignupForm
 
-User = get_user_model
+User = get_user_model()
 
 
 class SignupView(CreateView):

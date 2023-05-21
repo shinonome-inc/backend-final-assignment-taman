@@ -19,8 +19,10 @@
           <button type="button" class="topbuttons whiteback">Logout</button>
         </a>
       </li>
-      <li id="usericon">
-        {{ user.username }}
+      <li>
+        <a href="{% url 'accounts:user_profile' username=request.user.username %}" id="usericon">
+          {{ user.username }}
+        </a>
       </li>
     </ul>
     {% else %}
