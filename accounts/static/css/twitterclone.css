@@ -16,12 +16,14 @@ button {
     border-radius: 5px;
 }
 
-#topbuttons {
+.top {
     width: 70%;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
 }
 
-#topbuttons button {
+.topbuttons {
     width: 74px;
 }
 
@@ -34,5 +36,13 @@ button {
 .whiteback {
     background: whitesmoke;
     border: none;
+    color: rgb(0, 132, 255);
+}
+
+#usericon {
+    text-decoration: none;
+    font-size: 12pt;
+    padding: 5px 5px;
+    margin: 0 5px;
     color: rgb(0, 132, 255);
 }

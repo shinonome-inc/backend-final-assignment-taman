@@ -12,12 +12,33 @@
 <body>
   <header>
     <p id="logo">Twitter Clone</p>
-    <div id="topbuttons">
-      <button type="button" class="whiteback">ログイン</button>
-      <a href="{% url 'accounts:signup' %}">
-        <button type="button" class="blueback">登録</button>
-      </a>
-    </div>
+    {% if request.user.is_authenticated %}
+    <ul class="top">
+      <li>
+        <a href="{% url 'accounts:logout' %}">
+          <button type="button" class="topbuttons whiteback">Logout</button>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'accounts:user_profile' username=request.user.username %}" id="usericon">
+          {{ user.username }}
+        </a>
+      </li>
+    </ul>
+    {% else %}
+    <ul class="top">
+      <li>
+        <a href="{% url 'accounts:login' %}">
+          <button type="button" class="topbuttons whiteback">ログイン</button>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'accounts:signup' %}">
+          <button type="button" class="topbuttons blueback">登録</button>
+        </a>
+      </li>
+    </ul>
+    {% endif %}
   </header>
   {% block content %}
   {% endblock %}

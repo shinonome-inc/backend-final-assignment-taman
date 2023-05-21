@@ -1,14 +1,18 @@
-from django.contrib.auth import authenticate, login
+from django.conf import settings
+from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from .forms import SignupForm
+
+User = get_user_model()
 
 
 class SignupView(CreateView):
     form_class = SignupForm
     template_name = "accounts/signup.html"
-    success_url = reverse_lazy("tweets:home")
+    success_url = reverse_lazy(settings.LOGIN_REDIRECT_URL)
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -17,3 +21,10 @@ class SignupView(CreateView):
         user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
         return response
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    template_name = "accounts/profile.html"
+    model = User
+    slug_url_kwarg = "username"
+    slug_field = "username"
