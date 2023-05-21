@@ -269,7 +269,7 @@ class TestLogoutView(TestCase):
         self.client.force_login(self.user)
 
     def test_success_post(self):
-        response = self.client.get(self.url)
+        response = self.client.post(self.url)
         self.assertRedirects(
             response,
             reverse(settings.LOGOUT_REDIRECT_URL),
@@ -278,9 +278,20 @@ class TestLogoutView(TestCase):
         self.assertNotIn(SESSION_KEY, self.client.session)
 
 
-# class TestUserProfileView(TestCase):
+class TestUserProfileView(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="test@example.com",
+            password="testpassword",
+        )
+        self.client.force_login(self.user)
+        self.url = reverse("accounts:user_profile", kwargs={"username": self.user.username})
 
-#    def test_success_get(self):
+    def test_success_get(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "accounts/profile.html")
 
 
 # class TestUserProfileEditView(TestCase):

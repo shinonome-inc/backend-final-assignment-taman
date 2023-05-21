@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login
-from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
@@ -24,14 +23,8 @@ class SignupView(CreateView):
         return response
 
 
-class LoginView(auth_views.LoginView):
-    template_name = "accounts/login.html"
-
-
-class Logoutview(auth_views.LogoutView):
-    pass
-
-
 class UserProfileView(LoginRequiredMixin, DetailView):
     template_name = "accounts/profile.html"
     model = User
+    slug_url_kwarg = "username"
+    slug_field = "username"
