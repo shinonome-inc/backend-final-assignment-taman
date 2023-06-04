@@ -3,6 +3,8 @@ from django.contrib.auth import SESSION_KEY, get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
+from tweets.models import Tweet
+
 User = get_user_model()
 
 
@@ -290,8 +292,11 @@ class TestUserProfileView(TestCase):
 
     def test_success_get(self):
         response = self.client.get(self.url)
+        context = response.context
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "accounts/profile.html")
+        self.assertQuerysetEqual(context["tweet_list"], Tweet.objects.filter(user=self.user), ordered=False)
 
 
 # class TestUserProfileEditView(TestCase):
