@@ -50,10 +50,7 @@ class TestTweetCreateView(TestCase):
         self.assertIn(SESSION_KEY, self.client.session)
 
     def test_failure_post_with_empty_content(self):
-        empty_content_data = {
-            "user": self.user,
-            "content": ""
-        }
+        empty_content_data = {"user": self.user, "content": ""}
         response = self.client.post(self.url, empty_content_data)
         form = response.context["form"]
 
@@ -63,9 +60,7 @@ class TestTweetCreateView(TestCase):
         self.assertIn("このフィールドは必須です。", form.errors["content"])
 
     def test_failure_post_with_too_long_content(self):
-        long_content_data = {
-            "content": "a" * 201
-        }
+        long_content_data = {"content": "a" * 201}
         response = self.client.post(self.url, long_content_data)
         form = response.context["form"]
 
@@ -100,8 +95,7 @@ class TestTweetDeleteView(TestCase):
 
     def test_success_post(self):
         response = self.client.post(self.url1)
-        self.assertRedirects(response, reverse("tweets:home"),
-                             status_code=302, target_status_code=200)
+        self.assertRedirects(response, reverse("tweets:home"), status_code=302, target_status_code=200)
         self.assertEqual(Tweet.objects.count(), 1)
 
     def test_failure_post_with_not_exist_tweet(self):
