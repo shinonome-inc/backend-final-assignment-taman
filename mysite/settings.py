@@ -137,7 +137,7 @@ SQL_DEBUG = False
 if SQL_DEBUG:
 
     def show_toolbar(request):
-        return False
+        return True
 
     INSTALLED_APPS += ("debug_toolbar",)
     MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
