@@ -24,7 +24,7 @@
       </li>
       <li>
         <a href="{% url 'accounts:user_profile' username=request.user.username %}" id="usericon">
-          {{ request.user }}
+          {{ request.user.username }}
         </a>
       </li>
     </ul>
