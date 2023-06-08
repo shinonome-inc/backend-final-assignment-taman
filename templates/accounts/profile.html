@@ -4,5 +4,35 @@
 
 {% block content %}
 <h1>Profile</h1>
-<p>{{ user.username }}</p>
+<p>username: {{ user.username }}</p>
+{% for tweet in tweet_list %}
+<div class="tweetbox">
+    <ul class="topbar">
+        <li>
+            <a href="{% url 'accounts:user_profile' username=tweet.user %}">
+                {{ tweet.user }}
+            </a>
+        </li>
+        <li>
+            <p>{{ tweet.created_at }}</p>
+        </li>
+    </ul>
+    <p class="contents">{{ tweet.content | linebreaksbr }}</p>
+    <ul class="buttombar">
+        <li>
+            <a href="{% url 'tweets:detail' tweet.pk %}">
+                <i class="bi bi-eye-fill"></i>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'tweets:delete' tweet.pk %}">
+                <i class="bi bi-trash-fill"></i>
+            </a>
+        </li>
+        <li>
+            <i class="bi bi-heart"></i>
+        </li>
+    </ul>
+</div>
+{% endfor %}
 {% endblock %}

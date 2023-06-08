@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <p>この操作は取り消せません。削除してもよろしいですか？</p>
+    <button type="submit" class="blueback">削除</button>
+</form>
+{% endblock %}

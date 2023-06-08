@@ -2,18 +2,30 @@ header {
     display: flex;
 }
 
+a {
+    text-decoration: none;
+}
+
 #logo {
     width: 30%;
-    margin: 2px 0;
+    margin: 4px 0;
     font-size: 16pt;
     color: rgb(0, 132, 255);
 }
 
+#homelink {
+    width: 30%;
+    height: min-content;
+    margin: 4px 0;
+    font-size: 16pt;
+    color: rgb(0, 132, 255)
+}
+
 button {
     font-size: 12pt;
-    padding: 5px 5px;
-    margin: 0 5px;
-    border-radius: 5px;
+    padding: 4px;
+    margin: 0 4px;
+    border-radius: 4px;
 }
 
 .top {
@@ -42,7 +54,64 @@ button {
 #usericon {
     text-decoration: none;
     font-size: 12pt;
-    padding: 5px 5px;
-    margin: 0 5px;
+    padding: 4px 4px;
+    margin: 0 4px;
     color: rgb(0, 132, 255);
+}
+
+.tweetbox {
+    margin: 2em 0;
+    background: #ffffff;
+}
+
+.tweetbox p {
+    height: min-content;
+    margin: 0;
+    padding: 0 20px;
+}
+
+.tweetbox .topbar {
+    margin: 0;
+    display: flex;
+    list-style: none;
+    font-size: 16px;
+    align-items: center;
+    padding: 8px 20px;
+    background: #e7eaed;
+    color: #000000;
+    border: solid 2px #bbc9cd;
+    border-radius: 8px 8px 0 0;
+}
+
+.tweetbox .contents {
+    padding: 16px 20px;
+    margin: 0;
+    height: max-content;
+    border-left: solid 2px #bbc9cd;
+    border-right: solid 2px #bbc9cd;
+}
+
+.tweetbox .buttombar {
+    margin: 0;
+    display: flex;
+    list-style: none;
+    font-size: 16px;
+    align-items: center;
+    padding: 8px 20px;
+    background: #e7eaed;
+    border: solid 2px #bbc9cd;
+    border-radius: 0 0 8px 8px;
+}
+
+.tweetbox .bi {
+    padding: 0 8px 0 0;
+}
+
+.bi.bi-plus-square {
+    color: rgb(0, 221, 196);
+    font-size: 20pt;
+}
+
+.bi.bi-trash-fill {
+    color: rgb(255, 0, 0);
 }
