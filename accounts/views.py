@@ -56,7 +56,7 @@ class FollowView(LoginRequiredMixin, View):
             return HttpResponseBadRequest(render(request, "error/400.html"))
 
         if FriendShip.objects.filter(following=following, follower=follower).exists():
-            messages.warning(request, "すでにフォローしています。")
+            messages.warning(request, "フォロー済です。")
             return HttpResponseBadRequest(render(request, "error/400.html"))
 
         FriendShip.objects.create(following=following, follower=follower)
