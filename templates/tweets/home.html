@@ -26,11 +26,13 @@
                 <i class="bi bi-eye-fill"></i>
             </a>
         </li>
+        {% if request.user == tweet.user %}
         <li>
             <a href="{% url 'tweets:delete' tweet.pk %}">
                 <i class="bi bi-trash-fill"></i>
             </a>
         </li>
+        {% endif %}
         <li>
             <i class="bi bi-heart"></i>
         </li>

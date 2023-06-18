@@ -4,6 +4,7 @@ header {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 #logo {
@@ -42,7 +43,7 @@ button {
 .blueback {
     background: rgb(0, 132, 255);
     border: none;
-    color: white;
+    color: whitesmoke;
 }
 
 .whiteback {
@@ -78,9 +79,12 @@ button {
     align-items: center;
     padding: 8px 20px;
     background: #e7eaed;
-    color: #000000;
     border: solid 2px #bbc9cd;
     border-radius: 8px 8px 0 0;
+}
+
+.tweetbox .topbar a {
+    color: rgb(0, 132, 255);
 }
 
 .tweetbox .contents {
@@ -112,6 +116,38 @@ button {
     font-size: 20pt;
 }
 
+.bi.bi-eye-fill {
+    color: blue;
+}
+
 .bi.bi-trash-fill {
     color: rgb(255, 0, 0);
+}
+
+#profmid {
+    margin: 0px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+#profmid p {
+    margin: 4px;
+}
+
+#unfollow {
+    background: white;
+    border-color: red;
+    color: red;
+}
+
+#follow {
+    background: white;
+    border-color: blue;
+    color: blue;
+}
+
+.links {
+    color: rgb(32, 0, 156);
+    margin: 8px;
 }

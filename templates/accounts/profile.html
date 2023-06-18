@@ -4,7 +4,24 @@
 
 {% block content %}
 <h1>Profile</h1>
-<p>username: {{ user.username }}</p>
+<p>{{ user.username }}</p>
+<div id="profmid">
+    {% if request.user != user %}
+    {% if is_following is True %}
+    <form action="{% url 'accounts:unfollow' user.username %}" method="POST">
+        <button type="submit" id="unfollow">アンフォロー</button>
+        {% csrf_token %}
+    </form>
+    {% else %}
+    <form action="{% url 'accounts:follow' user.username %}" method="POST">
+        <button type="submit" id="follow">フォロー</button>
+        {% csrf_token %}
+    </form>
+    {% endif %}
+    {% endif %}
+    <p>フォロー数:<a href="{% url 'accounts:following_list' user.username %}" class="links">{{ following_num }}</a></p>
+    <p>フォロワー数:<a href="{% url 'accounts:follower_list' user.username %}" class="links">{{ followers_num }}</a></p>
+</div>
 {% for tweet in tweet_list %}
 <div class="tweetbox">
     <ul class="topbar">
@@ -24,15 +41,22 @@
                 <i class="bi bi-eye-fill"></i>
             </a>
         </li>
+        {% if request.user == tweet.user %}
         <li>
             <a href="{% url 'tweets:delete' tweet.pk %}">
                 <i class="bi bi-trash-fill"></i>
             </a>
         </li>
+        {% endif %}
         <li>
             <i class="bi bi-heart"></i>
         </li>
     </ul>
 </div>
 {% endfor %}
+<button class="blueback">
+    <a href="{% url 'tweets:home' %}">
+        ホームへ
+    </a>
+</button>
 {% endblock %}
