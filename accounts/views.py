@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseBadRequest
-from django.shortcuts import HttpResponseRedirect, get_object_or_404
+from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, View
 
@@ -50,18 +50,17 @@ class FollowView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         following = get_object_or_404(User, username=self.kwargs["username"])
         follower = request.user
-        redirect_url = reverse("accounts:user_profile", kwargs={"username": following.username})
 
         if following == follower:
             messages.warning(request, "自分自身はフォローできません。")
-            return HttpResponseBadRequest(redirect_url)
+            return HttpResponseBadRequest(render(request, "error/400.html"))
 
         if FriendShip.objects.filter(following=following, follower=follower).exists():
             messages.warning(request, "フォロー済です。")
-            return HttpResponseBadRequest(redirect_url)
+            return HttpResponseBadRequest(render(request, "error/400.html"))
 
         FriendShip.objects.create(following=following, follower=follower)
-        return HttpResponseRedirect(redirect_url)
+        return HttpResponseRedirect(reverse("tweets:home"))
 
 
 class UnFollowView(LoginRequiredMixin, View):
@@ -69,17 +68,16 @@ class UnFollowView(LoginRequiredMixin, View):
         following = get_object_or_404(User, username=self.kwargs["username"])
         follower = request.user
         unfollow = FriendShip.objects.filter(following=following, follower=follower)
-        redirect_url = reverse("accounts:user_profile", kwargs={"username": following.username})
 
         if following == follower:
             messages.warning(request, "自分自身を対象には出来ません。")
-            return HttpResponseBadRequest(redirect_url)
+            return HttpResponseBadRequest(render(request, "error/400.html"))
         elif unfollow.exists():
             unfollow.delete()
-            return HttpResponseRedirect(redirect_url)
+            return HttpResponseRedirect(reverse("tweets:home"))
         else:
             messages.warning(request, "無効な操作です。")
-            return HttpResponseBadRequest(redirect_url)
+            return HttpResponseBadRequest(render(request, "error/400.html"))
 
 
 class FollowingListView(LoginRequiredMixin, ListView):

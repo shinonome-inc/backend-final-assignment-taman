@@ -316,7 +316,7 @@ class TestFollowView(TestCase):
         response = self.client.post(url)
         self.assertRedirects(
             response,
-            reverse("accounts:user_profile", kwargs={"username": self.user2.username}),
+            reverse("tweets:home"),
             status_code=302,
             target_status_code=200,
         )
@@ -352,7 +352,7 @@ class TestUnfollowView(TestCase):
         response = self.client.post(url)
         self.assertRedirects(
             response,
-            reverse("accounts:user_profile", kwargs={"username": self.user2.username}),
+            reverse("tweets:home"),
             status_code=302,
             target_status_code=200,
         )
