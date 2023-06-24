@@ -57,10 +57,10 @@ class FollowView(LoginRequiredMixin, View):
 
         if FriendShip.objects.filter(following=following, follower=follower).exists():
             messages.warning(request, "フォロー済です。")
-            return HttpResponseBadRequest(render(request, "error/400.html"))
+            return HttpResponseRedirect(reverse("accounts:user_profile", kwargs={"username": following.username}))
 
         FriendShip.objects.create(following=following, follower=follower)
-        return HttpResponseRedirect(reverse("tweets:home"))
+        return HttpResponseRedirect(reverse("accounts:user_profile", kwargs={"username": following.username}))
 
 
 class UnFollowView(LoginRequiredMixin, View):
@@ -74,7 +74,7 @@ class UnFollowView(LoginRequiredMixin, View):
             return HttpResponseBadRequest(render(request, "error/400.html"))
         elif unfollow.exists():
             unfollow.delete()
-            return HttpResponseRedirect(reverse("tweets:home"))
+            return HttpResponseRedirect(reverse("accounts:user_profile", kwargs={"username": following.username}))
         else:
             messages.warning(request, "無効な操作です。")
             return HttpResponseBadRequest(render(request, "error/400.html"))

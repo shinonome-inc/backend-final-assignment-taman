@@ -316,7 +316,7 @@ class TestFollowView(TestCase):
         response = self.client.post(url)
         self.assertRedirects(
             response,
-            reverse("tweets:home"),
+            reverse("accounts:user_profile", kwargs={"username": self.user2.username}),
             status_code=302,
             target_status_code=200,
         )
@@ -331,12 +331,7 @@ class TestFollowView(TestCase):
     def test_failure_post_with_self(self):
         url = reverse("accounts:follow", kwargs={"username": self.user1.username})
         response = self.client.post(url)
-        self.assertRedirects(
-            response,
-            reverse("accounts:user_profile", kwargs={"username": self.user2.username}),
-            status_code=302,
-            target_status_code=200,
-        )
+        self.assertEqual(response.status_code, 400)
         self.assertFalse(FriendShip.objects.exists())
 
 
@@ -352,7 +347,7 @@ class TestUnfollowView(TestCase):
         response = self.client.post(url)
         self.assertRedirects(
             response,
-            reverse("tweets:home"),
+            reverse("accounts:user_profile", kwargs={"username": self.user2.username}),
             status_code=302,
             target_status_code=200,
         )
@@ -367,12 +362,7 @@ class TestUnfollowView(TestCase):
     def test_failure_post_with_self(self):
         url = reverse("accounts:follow", kwargs={"username": self.user1.username})
         response = self.client.post(url)
-        self.assertRedirects(
-            response,
-            reverse("accounts:user_profile", kwargs={"username": self.user2.username}),
-            status_code=302,
-            target_status_code=200,
-        )
+        self.assertEqual(response.status_code, 400)
         self.assertTrue(FriendShip.objects.filter(follower=self.user1, following=self.user2).exists())
 
 
