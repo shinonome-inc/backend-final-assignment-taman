@@ -9,3 +9,13 @@ class Tweet(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class Like(models.Model):
+    target = models.ForeignKey(Tweet, related_name="likes", on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="likes", on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["target", "user"], name="like_unique"),
+        ]

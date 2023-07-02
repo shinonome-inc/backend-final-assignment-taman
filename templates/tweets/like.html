@@ -1,0 +1,15 @@
+<div>
+    {% if is_liked is True or tweet.id in user_like_list %}
+    <button id="tweet-{{tweet.id}}" class="like_btn" data-url="{% url 'tweets:unlike' tweet.id %}" data-pk={{tweet.pk}}
+        data-is-liked="true">
+        <i class="bi bi-heart-fill"></i>
+    </button>
+    {% else %}
+    <button id="tweet-{{tweet.id}}" class="like_btn" data-url="{% url 'tweets:like' tweet.id %}" data-pk={{tweet.pk}}
+        data-is-liked="false">
+        <i class="bi bi-heart"></i>
+    </button>
+    {% endif %}
+
+    <span id="count_{{tweet.id}}">{{ tweet.likes.count }}</span>
+</div>

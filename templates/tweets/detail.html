@@ -6,6 +6,7 @@
 <p>ユーザー:{{ tweet.user }}</p>
 <p>投稿日:{{ tweet.created_at }}</p>
 <p>内容:{{ tweet.content }}</p>
+{% include 'tweets/like.html' %}
 
 {% if tweet.user == request.user %}
 <a href="{% url 'tweets:delete' tweet.pk %}">
