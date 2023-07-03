@@ -36,12 +36,12 @@ class TweetCreateView(LoginRequiredMixin, CreateView):
 class TweetDetailView(LoginRequiredMixin, DetailView):
     template_name = "tweets/detail.html"
     model = Tweet
-    queryset = model.objects.select_related("user")
+    queryset = model.objects.select_related("user").prefetch_related("likes")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["is_liked"] = Like.objects.filter(user=self.request.user, target_id=self.kwargs["pk"]).exists()
-        context["liked_count"] = Like.objects.filter(target_id=self.kwargs["pk"]).count()
+        context["is_liked"] = self.object.likes.filter(user=self.request.user, target_id=self.kwargs["pk"]).exists()
+        context["liked_count"] = self.object.likes.filter(target_id=self.kwargs["pk"]).count()
         return context
 
 
