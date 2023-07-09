@@ -151,3 +151,18 @@ button {
     color: rgb(32, 0, 156);
     margin: 8px;
 }
+
+#likelist {
+    list-style: none;
+}
+
+.like_btn {
+    border: none;
+    padding: 0;
+    width: 20px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.bi.bi-heart-fill {
+    color: red;
+}
