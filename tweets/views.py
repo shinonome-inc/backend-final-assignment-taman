@@ -75,10 +75,7 @@ class UnlikeView(LoginRequiredMixin, View):
         user = request.user
         tweet = get_object_or_404(Tweet, pk=kwargs["pk"])
         like = Like.objects.filter(target=tweet, user=user)
-
-        if like.exists():
-            like.delete()
-
+        like.delete()
         likes_count = Like.objects.prefetch_related("target").filter(target=tweet).count()
         context = {"liked_count": likes_count}
         return JsonResponse(context)
